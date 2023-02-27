@@ -38,6 +38,11 @@ class ControllerBase
   # use ERB and binding to evaluate templates
   # pass the rendered html to render_content
   def render(template_name)
+    new_name
+    fileObject = File.open(, "r")
+    template = ERB.new(fileObject).result(binding)
+
+    render_content(template, "text/html")
   end
 
   # method exposing a `Session` object
